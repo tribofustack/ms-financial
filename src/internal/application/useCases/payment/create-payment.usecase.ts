@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IOrder } from 'src/internal/domain/checkout/entities/order.entity';
+// import { IOrder } from 'src/internal/domain/checkout/entities/order.entity';
 import { Payment } from 'src/internal/domain/payment/entities/payment.entity';
 import { IPaymentRepository } from 'src/internal/domain/payment/repositories/payment.repository';
 import { IPaymentIntegration } from 'src/internal/application/ports/integrations/payment';
@@ -24,7 +24,7 @@ export class CreatePayment {
         private idGenerator: IIdentifierGenerator,
     ) { }
 
-    async execute(order: IOrder): Promise<void> {
+    async execute(order: any/*IOrder*/): Promise<void> {
         const payment = new Payment({
             id: this.idGenerator.generate(),
             customerId: order.customerId,

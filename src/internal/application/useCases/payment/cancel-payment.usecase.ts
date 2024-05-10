@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IPaymentRepository } from 'src/internal/domain/payment/repositories/payment.repository';
 import { ChangedPaymentStatusEvent } from 'src/internal/domain/payment/events/payment-status-changed.event';
-import { ChangedOrderStatusEvent } from 'src/internal/domain/checkout/events/order-status-changed.event';
+// import { ChangedOrderStatusEvent } from 'src/internal/domain/checkout/events/order-status-changed.event';
 import { DomainException } from 'src/internal/application/errors';
 import { IEventEmitter } from '../../ports/events/event';
 
@@ -32,13 +32,13 @@ export class CancelPaymentByOrderId {
                     status: 'Cancelado',
                 }),
             );
-            this.eventEmitter.emit(
-                'order-status.changed',
-                new ChangedOrderStatusEvent({
-                    orderId,
-                    status: 'Cancelado',
-                }),
-            );
+            // this.eventEmitter.emit(
+            //     'order-status.changed',
+            //     new ChangedOrderStatusEvent({
+            //         orderId,
+            //         status: 'Cancelado',
+            //     }),
+            // );
 
             console.log('Cancelled.');
         }, 20000);
