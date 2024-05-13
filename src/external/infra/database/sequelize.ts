@@ -1,14 +1,10 @@
 import { SequelizeModule, SequelizeModuleOptions } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import { OrderItemModel } from 'src/external/adapters/checkout/sequelize/order-item-model';
-import { OrderModel } from 'src/external/adapters/checkout/sequelize/order-model';
 import { DatabaseException } from 'src/internal/application/errors';
 
 import { connection } from './connections';
 
 export const sequelizeModels = [
-  OrderModel,
-  OrderItemModel,
 ];
 
 export const sequelizeModule = SequelizeModule.forRoot({

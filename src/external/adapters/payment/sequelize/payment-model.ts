@@ -6,7 +6,6 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { OrderModel } from '../../checkout/sequelize/order-model';
 
 interface IPaymentModel {
   id: string;
@@ -34,22 +33,20 @@ class PaymentModel extends Model implements IPaymentModel {
   declare id: string;
 
   @Column({
-    field: 'customer_id',
-    allowNull: false,
-    type: DataType.STRING,
-  })
-  declare customerId: string;
-
-  @ForeignKey(() => OrderModel)
-  @Column({
     field: 'order_id',
+    primaryKey: true,
+    unique: true,
     allowNull: false,
     type: DataType.STRING,
   })
   declare orderId: string;
 
-  @BelongsTo(() => OrderModel)
-  declare order: OrderModel;
+  @Column({
+    field: 'customer_id',
+    allowNull: false,
+    type: DataType.STRING,
+  })
+  declare customerId: string;
 
   @Column({
     field: 'status',
