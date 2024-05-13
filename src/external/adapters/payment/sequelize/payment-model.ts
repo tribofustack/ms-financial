@@ -6,7 +6,6 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { CustomerModel } from '../../customer/sequelize/customer.model';
 import { OrderModel } from '../../checkout/sequelize/order-model';
 
 interface IPaymentModel {
@@ -34,16 +33,12 @@ class PaymentModel extends Model implements IPaymentModel {
   })
   declare id: string;
 
-  @ForeignKey(() => CustomerModel)
   @Column({
     field: 'customer_id',
     allowNull: false,
     type: DataType.STRING,
   })
   declare customerId: string;
-
-  @BelongsTo(() => CustomerModel)
-  declare customer: CustomerModel;
 
   @ForeignKey(() => OrderModel)
   @Column({
