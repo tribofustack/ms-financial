@@ -3,6 +3,8 @@ import { responseError } from 'src/external/infra/errors/reponse.error';
 
 @Controller('health')
 export class HealthController {
+    constructor(
+    ){}
     @Get()
     async checkHealth() {
         try {

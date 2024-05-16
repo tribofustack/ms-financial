@@ -18,6 +18,6 @@ export class ChangePaymentStatusListener {
     const { paymentId, status } = event.data;
     await this.paymentRepository.changeStatus(paymentId, status);
     // envia mensagem para atualizar status da order
-    await this.paymentPublisher.sendMessage(event)
+    await this.paymentPublisher.sendMessage(event.data)
   }
 }

@@ -13,7 +13,7 @@ export class PaymentPublisher implements IPublisher {
     await this.messageBroker.publishInExchange({
       exchange: EXCHANGE,
       message: JSON.stringify(message),
-      routingKey: `${PAYMENT_BINDING_KEY}.create`,
+      routingKey: `payments.create`,
     });
   }
 }
