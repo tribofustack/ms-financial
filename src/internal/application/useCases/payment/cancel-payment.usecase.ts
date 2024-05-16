@@ -29,17 +29,10 @@ export class CancelPaymentByOrderId {
                 'payment-status.changed',
                 new ChangedPaymentStatusEvent({
                     paymentId: payment.id,
+                    orderId,
                     status: 'Cancelado',
                 }),
             );
-            // this.eventEmitter.emit(
-            //     'order-status.changed',
-            //     new ChangedOrderStatusEvent({
-            //         orderId,
-            //         status: 'Cancelado',
-            //     }),
-            // );
-
             console.log('Cancelled.');
         }, 20000);
     }
