@@ -2,6 +2,7 @@ import { paymentStatusDto } from '../dto/payment-status.dto';
 
 type IConstructorDto = {
   paymentId: string;
+  orderId: string;
   status: paymentStatusDto;
 };
 

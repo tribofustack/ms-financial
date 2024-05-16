@@ -33,11 +33,7 @@ export class PaymentSequelizeRepository implements IPaymentRepository {
 
   async findOne(id: string): Promise<Payment> {
     throw new Error(`Method not implemented. ${id}`);
-  }
-
-  findAll(): Promise<Payment[]> {
-    throw new Error('Method not implemented.');
-  }
+  }  
 
   async create(params: Partial<Payment>): Promise<void | Payment> {
     await this.paymentModel.create({
@@ -50,6 +46,10 @@ export class PaymentSequelizeRepository implements IPaymentRepository {
       qrCode: params.qrCode,
       url: params.url,
     });
+  }
+
+  findAll(): Promise<Payment[]> {
+    throw new Error('Method not implemented.');
   }
   delete(id: string): Promise<void> {
     throw new Error(`Method not implemented. ${id}`);

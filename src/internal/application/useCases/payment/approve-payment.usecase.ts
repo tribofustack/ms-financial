@@ -9,7 +9,6 @@ export class ApprovePaymentByOrderId {
     constructor(
         @Inject('PaymentRepository')
         private paymentRepository: IPaymentRepository,
-
         @Inject('EventEmitter')
         private eventEmitter: IEventEmitter,
     ) { }
@@ -25,17 +24,10 @@ export class ApprovePaymentByOrderId {
                 'payment-status.changed',
                 new ChangedPaymentStatusEvent({
                     paymentId: payment.id,
+                    orderId,
                     status: 'Aprovado',
                 }),
-            );
-            // this.eventEmitter.emit(
-            //     'order-status.changed',
-            //     new ChangedOrderStatusEvent({
-            //         orderId,
-            //         status: 'Pago',
-            //     }),
-            // );
-
+            );            
             console.log('Paid.');
         }, 20000);
     }
