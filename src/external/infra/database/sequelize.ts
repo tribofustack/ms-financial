@@ -1,13 +1,10 @@
 import { SequelizeModule, SequelizeModuleOptions } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { DatabaseException } from 'src/internal/application/errors';
+import { connection } from './connections';
 import { PaymentModel } from 'src/external/adapters/payment/sequelize/payment-model';
 
-import { connection } from './connections';
-
-export const sequelizeModels = [
-  PaymentModel,
-];
+export const sequelizeModels = [PaymentModel];
 
 export const sequelizeModule = SequelizeModule.forRoot({
   ...connection,

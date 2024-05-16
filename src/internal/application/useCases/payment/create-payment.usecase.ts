@@ -1,30 +1,28 @@
 import { Inject, Injectable } from '@nestjs/common';
-// import { IOrder } from 'src/internal/domain/checkout/entities/order.entity';
 import { Payment } from 'src/internal/domain/payment/entities/payment.entity';
 import { IPaymentRepository } from 'src/internal/domain/payment/repositories/payment.repository';
 import { IPaymentIntegration } from 'src/internal/application/ports/integrations/payment';
 import { IIdentifierGenerator } from 'src/internal/application/ports/tokens/id-generator';
-import { CreatedPaymentEvent } from 'src/internal/domain/payment/events/payment-created.event';
 import { DomainException } from 'src/internal/application/errors';
+import { OrderDto } from 'src/internal/domain/payment/dto/order.dto';
 import { IEventEmitter } from '../../ports/events/event';
+import { ChangedPaymentStatusEvent } from 'src/internal/domain/payment/events/payment-status-changed.event';
 
 @Injectable()
 export class CreatePayment {
     constructor(
         @Inject('PaymentRepository')
         private paymentRepository: IPaymentRepository,
-
         @Inject('PaymentIntegration')
         private paymentIntegration: IPaymentIntegration,
-
-        @Inject('EventEmitter')
-        private eventEmitter: IEventEmitter,
-
         @Inject('IdGenerator')
         private idGenerator: IIdentifierGenerator,
+        @Inject('EventEmitter')
+        private eventEmitter: IEventEmitter,
     ) { }
 
-    async execute(order: any/*IOrder*/): Promise<void> {
+    // é executado quando a order é criada e inicia a criação do payment
+    async execute({ order }: { order: OrderDto }): Promise<void> {
         const payment = new Payment({
             id: this.idGenerator.generate(),
             customerId: order.customerId,
@@ -42,10 +40,16 @@ export class CreatePayment {
 
         payment.setQrCode(qrCode);
         payment.setUrl(url);
-        payment.changeStatus('Pendente de pagamento');
 
         await this.paymentRepository.create(payment);
 
-        this.eventEmitter.emit('payment.created', new CreatedPaymentEvent(payment));
+        this.eventEmitter.emit(
+            'payment-status.changed',
+            new ChangedPaymentStatusEvent({
+                paymentId: payment.id,
+                orderId: order.id,
+                status: 'Pendente de pagamento',
+            }),
+        );
     }
 }
