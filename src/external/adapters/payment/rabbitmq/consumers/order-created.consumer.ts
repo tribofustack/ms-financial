@@ -10,7 +10,11 @@ export class CreatePaymentConsumer {
     ) {}
     
     async handle(message: any) {
-        console.log('\n', message ,'\n')
-        await this.createPaymentUseCase.execute(message)
+        try {
+            console.log('CreatePaymentConsumer', message)
+            await this.createPaymentUseCase.execute(message)
+        } catch(error) {
+            console.error('CreatePaymentConsumer:', error.message)
+        }
     }
 }

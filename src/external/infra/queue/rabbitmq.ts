@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Channel, Connection, Message, connect } from 'amqplib';
+import { Channel, Connection, Message, ServerProperties, connect } from 'amqplib';
 import { env } from 'src/internal/application/configs/env';
 import { IMessageBroker } from 'src/internal/application/ports/queues/message-broker';
 
