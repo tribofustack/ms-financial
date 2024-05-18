@@ -15,7 +15,7 @@ describe('CreatePayment', () => {
   let idGeneratorMock: jest.Mocked<IIdentifierGenerator>;
   let eventEmitterMock: jest.Mocked<IEventEmitter>;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     paymentRepositoryMock = {
       create: jest.fn(),
     } as unknown as jest.Mocked<IPaymentRepository>;

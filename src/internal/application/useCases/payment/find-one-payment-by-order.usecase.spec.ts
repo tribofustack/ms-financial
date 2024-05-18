@@ -8,7 +8,7 @@ describe('FindOnePaymentByOrderId', () => {
   let findOnePaymentByOrderId: FindOnePaymentByOrderId;
   let paymentRepositoryMock: jest.Mocked<IPaymentRepository>;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     paymentRepositoryMock = {
       findOneByOrderId: jest.fn(),
     } as unknown as jest.Mocked<IPaymentRepository>;

@@ -11,7 +11,7 @@ describe('ApprovePaymentByOrderId', () => {
   let paymentRepositoryMock: jest.Mocked<IPaymentRepository>;
   let eventEmitterMock: jest.Mocked<IEventEmitter>;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     jest.useFakeTimers();
     paymentRepositoryMock = {
       findOneByOrderId: jest.fn(),
