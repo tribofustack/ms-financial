@@ -79,5 +79,62 @@ describe('Payment Entity', () => {
       }
       expect(payment).toBeFalsy();
     });
+    it('should validate status Aprovado', () => {   
+      // arrange
+      try {
+        // act
+        const payment = new Payment({
+          id: 'testId',
+          customerId: 'abc',
+          orderId: 'abc',
+          value: 10,
+        });
+        payment.changeStatus('Aprovado');
+        payment.changeStatus('Cancelado');
+      } catch (error) {
+        // assert
+        expect(error).toBeTruthy();
+        expect(error.message).toBe('payment was approved');
+        expect(error).toBeInstanceOf(DomainException);
+      }
+    });
+    it('should validate status Cancelado', () => {   
+      // arrange
+      try {
+        // act
+        const payment = new Payment({
+          id: 'testId',
+          customerId: 'abc',
+          orderId: 'abc',
+          value: 10,
+        });
+        payment.changeStatus('Cancelado');
+        payment.changeStatus('Aprovado');
+      } catch (error) {
+        // assert
+        expect(error).toBeTruthy();
+        expect(error.message).toBe('payment was cancelled');
+        expect(error).toBeInstanceOf(DomainException);
+      }
+    });
+    it('should validate status Criado', () => {   
+      // arrange
+      try {
+        // act
+        const payment = new Payment({
+          id: 'testId',
+          customerId: 'abc',
+          orderId: 'abc',
+          value: 10,
+        });
+        payment.changeStatus('Aprovado');
+        payment.changeStatus('Pendente de pagamento');
+      } catch (error) {
+        // assert
+        expect(error).toBeTruthy();
+        expect(error.message).toBe('payment was not created');
+        expect(error).toBeInstanceOf(DomainException);
+      }
+    });
   });
 });
