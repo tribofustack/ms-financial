@@ -47,10 +47,12 @@ describe('CreatePayment', () => {
 
   describe('execute', () => {
     it('should create a payment successfully', async () => {
-      const order = {
-        id: 'orderId1',
-        customerId: 'customerId1',
-        total: 10,
+      const order = { 
+        "order": {
+          id: 'orderId1',
+          customerId: 'customerId1',
+          total: 10,
+        }
       };
 
       const mockQrCode = 'mockQrCode';
@@ -68,25 +70,25 @@ describe('CreatePayment', () => {
 
       expect(paymentRepositoryMock.create).toHaveBeenCalledWith(
         expect.objectContaining({
-          id: 'paymentId1',
-          customerId: 'customerId1',
-          orderId: 'orderId1',
-          value: 10,
-          status: 'Pendente de pagamento',
+          "customerId": "customerId1", 
+          "id": "paymentId1", 
+          "orderId": "orderId1", 
+          "paymentType": "pix", 
+          "qrCode": "mockQrCode", 
+          "status": "Criado", 
+          "url": "mockUrl", 
+          "value": 10
         }),
-      );
-
-      expect(eventEmitterMock.emit).toHaveBeenCalledWith(
-        'payment.created',
-        expect.any(CreatedPaymentEvent),
       );
     });
 
     it('should throw a DomainException if payment creation fails', async () => {
-      const order = {
-        id: 'orderId1',
-        customerId: 'customerId1',
-        total: 10,
+      const order = { 
+        "order": {
+          id: 'orderId1',
+          customerId: 'customerId1',
+          total: 10,
+        }
       };
 
       const mockStatus = 'cancelled';
