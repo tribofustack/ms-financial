@@ -1,6 +1,6 @@
 import { SequelizeModule, SequelizeModuleOptions } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import { DatabaseException } from 'src/internal/application/errors';
+import { DatabaseException } from 'src/external/infra/errors/database.error';
 import { PaymentModel } from 'src/external/adapters/payment/sequelize/payment-model';
 
 import { connection } from './connections';
