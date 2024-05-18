@@ -5,7 +5,6 @@ import { Payment } from 'src/internal/domain/payment/entities/payment.entity';
 import { IPaymentRepository } from 'src/internal/domain/payment/repositories/payment.repository';
 import { IPaymentIntegration } from 'src/internal/application/ports/integrations/payment';
 import { IIdentifierGenerator } from 'src/internal/application/ports/tokens/id-generator';
-import { CreatedPaymentEvent } from 'src/internal/domain/payment/events/payment-created.event';
 import { IEventEmitter } from '../../ports/events/event';
 
 describe('CreatePayment', () => {
