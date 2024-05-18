@@ -31,20 +31,18 @@ class PaymentModel extends Model implements IPaymentModel {
   declare id: string;
 
   @Column({
-    field: 'order_id',
-    primaryKey: true,
-    unique: true,
-    allowNull: false,
-    type: DataType.STRING,
-  })
-  declare orderId: string;
-
-  @Column({
     field: 'customer_id',
     allowNull: false,
     type: DataType.STRING,
   })
   declare customerId: string;
+
+  @Column({
+    field: 'order_id',
+    allowNull: false,
+    type: DataType.STRING,
+  })
+  declare orderId: string;
 
   @Column({
     field: 'status',
