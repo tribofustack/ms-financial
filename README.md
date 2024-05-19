@@ -35,5 +35,4 @@ Backend Routes
 
 | Quality Gate Status | Coverage |
 | --- | --- |
-| [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=tribofustack_ms-financial)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial)        |
-| [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tribofustack_ms-financial&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial) |
+| [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=tribofustack_ms-financial)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tribofustack_ms-financial&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial) |
