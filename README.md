@@ -1,7 +1,3 @@
-[![Build](https://github.com/tribofustack/ms-financial/actions/workflows/build.yaml/badge.svg)](https://github.com/tribofustack/ms-financial/actions/workflows/build.yaml)
-
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tribofustack_ms-financial&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial)
-
 <h1 align="center">Orderly MS Financial</h1>
 
 <p align="center">
@@ -35,4 +31,9 @@ Backend Routes
     POST api/payments/{orderId}: Creates a new payment for an order.
     DELETE /payments/{orderId}: Cancels the payment associated with the specified order ID.
 
-## ✨ Technologies
+## ✨ Quality
+
+| Quality Gate Status                                                                                                                                                                    | Coverage |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=tribofustack_ms-financial)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial)        |
+| [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tribofustack_ms-financial&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial) |
