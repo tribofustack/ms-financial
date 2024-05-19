@@ -27,12 +27,10 @@ Key Features
 
 Backend Routes
 
-    GET /payments/{orderId}: Fetches payment information for the specified order ID.
-    POST api/payments/{orderId}: Creates a new payment for an order.
-    DELETE /payments/{orderId}: Cancels the payment associated with the specified order ID.
+- [Postman Public Collection](https://documenter.getpostman.com/view/13574011/2s9YsM8WDL)
 
 ## ✨ Quality
 
-| Quality Gate Status | Coverage |
-| --- | --- |
+| Quality Gate Status                                                                                                                                                                                   | Coverage                                                                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tribofustack_ms-financial&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial) | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tribofustack_ms-financial&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tribofustack_ms-financial) |
