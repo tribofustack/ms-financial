@@ -26,6 +26,7 @@ export interface IMessageBroker {
   ): Promise<void>;
 }
 
-export interface IPublisher {
-  sendMessage(message: any): Promise<void>;
+export interface IPaymentPublisher {
+  paymentChangedMessage(message: any): Promise<void>;
+  paymentCanceledMessage(message: any): Promise<void>;
 }

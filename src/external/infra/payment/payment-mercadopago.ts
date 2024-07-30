@@ -2,15 +2,15 @@ import {
   IPaymentIntegration,
   IPaymentResult,
   IRefreshToken,
-} from 'src/internal/application/ports/integrations/payment';
+} from "src/internal/application/ports/integrations/payment";
 import {
   IPayment,
   Payment,
-} from 'src/internal/domain/payment/entities/payment.entity';
-import { IHttp } from 'src/internal/application/ports/http/http';
-import { Inject, Injectable } from '@nestjs/common';
-import { env } from 'src/internal/application/configs/env';
-import { IIdentifierGenerator } from 'src/internal/application/ports/tokens/id-generator';
+} from "src/internal/domain/payment/entities/payment.entity";
+import { IHttp } from "src/internal/application/ports/http/http";
+import { Inject, Injectable } from "@nestjs/common";
+import { env } from "src/internal/application/configs/env";
+import { IIdentifierGenerator } from "src/internal/application/ports/tokens/id-generator";
 
 @Injectable()
 export class PaymentMercadoPago implements IPaymentIntegration {
@@ -20,8 +20,8 @@ export class PaymentMercadoPago implements IPaymentIntegration {
   private refreshTokenDefault: string;
 
   constructor(
-    @Inject('Http') private httpClient: IHttp,
-    @Inject('IdGenerator') private idGenerator: IIdentifierGenerator,
+    @Inject("Http") private httpClient: IHttp,
+    @Inject("IdGenerator") private idGenerator: IIdentifierGenerator,
   ) {
     this.baseUrl = env.paymentIntegrationUrl;
     this.clientSecret = env.paymentIntegrationClientSecret;
@@ -38,7 +38,7 @@ export class PaymentMercadoPago implements IPaymentIntegration {
         refresh_token: this.refreshTokenDefault,
       },
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -58,9 +58,11 @@ export class PaymentMercadoPago implements IPaymentIntegration {
   private formatPaymentResult(body: any): IPaymentResult {
     return {
       id: body?.id ?? this.idGenerator.generate(),
-      status: body?.status ?? 'fail',
-      qrCode: body?.point_of_interaction?.transaction_data?.qr_code ?? '',
-      url: body?.point_of_interaction?.transaction_data?.ticket_url ?? '',
+      status: body?.status ?? "fail",
+      qrCode:
+        body?.point_of_interaction?.transaction_data?.qr_code ??
+        this.idGenerator.generate(),
+      url: body?.point_of_interaction?.transaction_data?.ticket_url ?? body.url,
     };
   }
 
@@ -78,9 +80,9 @@ export class PaymentMercadoPago implements IPaymentIntegration {
       },
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'X-Idempotency-Key': `12345`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        "X-Idempotency-Key": `12345`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     });
 
@@ -94,7 +96,7 @@ export class PaymentMercadoPago implements IPaymentIntegration {
       url: `${this.baseUrl}/v1/payments/${Number(paymentId)}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -102,24 +104,28 @@ export class PaymentMercadoPago implements IPaymentIntegration {
   }
 
   async createPayment(payment: Payment): Promise<IPaymentResult> {
-    const { accessToken } = await this.refreshToken();
+    // const { accessToken } = await this.refreshToken();
 
-    const { body } = await this.httpClient.post({
-      url: `${this.baseUrl}/v1/payments`,
-      body: {
-        transaction_amount: payment.value,
-        payment_method_id: payment.paymentType,
-        payer: { email: 'customer@customer.com' },
-      },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'X-Idempotency-Key': `12345`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+    // const { body } = await this.httpClient.post({
+    //   url: `${this.baseUrl}/v1/payments`,
+    //   body: {
+    //     transaction_amount: payment.value,
+    //     payment_method_id: payment.paymentType,
+    //     payer: { email: 'customer@customer.com' },
+    //   },
+    //   headers: {
+    //     Authorization: `Bearer ${accessToken}`,
+    //     'X-Idempotency-Key': `12345`,
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+    return this.formatPaymentResult({
+      id: this.idGenerator.generate(),
+      status: "pending",
+      qrCode: this.idGenerator.generate(),
+      url: "https://auth.mercadopago.com/authorization?client_id=APP_ID&response_type=code&platform_id=mp&state=RANDOM_ID&redirect_uri=YOUR_REDIRECT_URI",
     });
-
-    return this.formatPaymentResult(body);
   }
   // https://auth.mercadopago.com/authorization?client_id=APP_ID&response_type=code&platform_id=mp&state=RANDOM_ID&redirect_uri=YOUR_REDIRECT_URI
 }
