@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: ms-financial-container
-        image: dealmachine/financial-api:3
+        image: dealmachine/financial-api:latest
+        imagePullPolicy: Always
         workingDir: /usr/financial/api
         ports:
         - containerPort: 3003
