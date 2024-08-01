@@ -41,10 +41,10 @@ describe("ApprovePaymentByOrderId", () => {
 
   describe("execute", () => {
     it("should approve the payment and emit events", async () => {
-      const orderId = "testOrderId";
-      const customerId = "testCustomerId";
+      const orderId = "a7a67b8e-5f28-4a3e-8a24-3f946918c2b6";
+      const customerId = "a7a67b8e-5f28-4a3e-8a24-3f946918c2b6";
       const payment = new Payment({
-        id: "paymentId1",
+        id: "a7a67b8e-5f28-4a3e-8a24-3f946918c2b6",
         customerId: customerId,
         orderId: orderId,
         value: 10,
@@ -63,7 +63,7 @@ describe("ApprovePaymentByOrderId", () => {
     });
 
     it("should throw NotFoundException if the payment does not exist", async () => {
-      const orderId = "nonExistentOrderId";
+      const orderId = "a7a67b8e-5f28-4a3e-8a24-3f946918c2b6";
 
       paymentRepositoryMock.findOneByOrderId.mockResolvedValue(null);
 
